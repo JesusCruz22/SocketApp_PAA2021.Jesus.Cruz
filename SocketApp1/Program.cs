@@ -21,29 +21,35 @@ namespace SocketApp1
 
                 Console.WriteLine($"Servidor iniciado en el puerto {puerto}");
 
-                // Crear una nueva conexión desde un cliente
-                // Creamos la conexión en un socket (que nos otorga ServerSocket)
-                Socket conexionCliente = serverProduction.getClient();
-
-                // Instanciamos nuestra clase de CLientSocket
-                ClientSocket clienteSocket = new ClientSocket(conexionCliente);
-
-
-
                 // LOOP INFINITO (hasta cierta condición)
                 while (true)
                 {
-                    clienteSocket.Write("Hola mundo"); // Escribimos en el socket (comm)
+                    // Crear una nueva conexión desde un cliente
+                    // Creamos la conexión en un socket (que nos otorga ServerSocket)
+                    Socket conexionCliente = serverProduction.getClient();
 
+                    Console.WriteLine("Nuevo cliente conectado");
+
+                    // Instanciamos nuestra clase de CLientSocket
+                    ClientSocket clienteSocket = new ClientSocket(conexionCliente);
+
+                    clienteSocket.Write("Hola mundo"); // Escribimos en el socket (comm)
 
                     string lectura = clienteSocket.Read(); // Leemos desde el socket (comm)
 
-                    if(lectura.ToLower() == "q")
+                    if (lectura != null) // Si es que el cliente no escribió nada, no procese nada
                     {
-                        clienteSocket.Disconnect();
-                        serverProduction.Stop();
-                        Environment.Exit(0);
+                        Console.WriteLine($"Cliente: {lectura}"); // Mostrar mensaje desde cliente
+
+                        if (lectura.ToLower() == "q")
+                        {
+                            clienteSocket.Disconnect();
+                            serverProduction.Stop();
+                            Environment.Exit(0);
+                        }
                     }
+
+                    clienteSocket.Disconnect();
                 }
             } else
             {

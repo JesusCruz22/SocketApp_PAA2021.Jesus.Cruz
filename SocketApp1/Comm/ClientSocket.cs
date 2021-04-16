@@ -32,7 +32,7 @@ namespace SocketApp1.Comm
         {
             try
             {
-                return reader.ReadLine(); // si devuelve una string, leyó correctamente
+                return reader.ReadLine().Trim(); // si devuelve una string, leyó correctamente
             }
             catch (Exception)
             {
