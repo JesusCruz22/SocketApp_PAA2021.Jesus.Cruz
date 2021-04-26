@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocketApp1", "SocketApp1\So
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocketApp1_Cliente", "SocketApp1_Cliente\SocketApp1_Cliente.csproj", "{46C3BCF4-934A-493D-AD2C-E87391334565}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocketAppDAL", "SocketAppDAL\SocketAppDAL.csproj", "{AB7D14EE-A2E4-4330-B0BE-B76CDE0A0711}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{46C3BCF4-934A-493D-AD2C-E87391334565}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{46C3BCF4-934A-493D-AD2C-E87391334565}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{46C3BCF4-934A-493D-AD2C-E87391334565}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB7D14EE-A2E4-4330-B0BE-B76CDE0A0711}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB7D14EE-A2E4-4330-B0BE-B76CDE0A0711}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB7D14EE-A2E4-4330-B0BE-B76CDE0A0711}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB7D14EE-A2E4-4330-B0BE-B76CDE0A0711}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
