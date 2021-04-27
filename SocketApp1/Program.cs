@@ -3,6 +3,8 @@ using System;
 using System.Configuration;
 using System.Net.Sockets;
 using System.Net;
+using SocketApp1.Threads;
+using System.Threading;
 
 namespace SocketApp1
 {
@@ -10,55 +12,16 @@ namespace SocketApp1
     {
         static void Main(string[] args)
         {
-            // Instanciar un servidor socket (ServerSocket)
-            ServerSocket serverProduction = new ServerSocket();
+            // Obtener el puerto desde las configuraciones para escribirlo en consola mas tarde
+            string puerto = ConfigurationManager.AppSettings["port"];
 
-            // Levantar el servidor de sockets
-            if(serverProduction.Start())
-            {
-                // Indicar que el servidor fue iniciado exitosamente
-                string puerto = ConfigurationManager.AppSettings["port"];
-
-                Console.WriteLine($"Servidor iniciado en el puerto {puerto}");
-
-                // LOOP INFINITO (hasta cierta condición)
-                while (true)
-                {
-                    // Crear una nueva conexión desde un cliente
-                    // Creamos la conexión en un socket (que nos otorga ServerSocket)
-                    Socket conexionCliente = serverProduction.getClient();
-
-                    Console.WriteLine("Nuevo cliente conectado");
-
-                    // Instanciamos nuestra clase de CLientSocket
-                    ClientSocket clienteSocket = new ClientSocket(conexionCliente);
-
-                    clienteSocket.Write("Hola mundo"); // Escribimos en el socket (comm)
-
-                    string lectura = clienteSocket.Read(); // Leemos desde el socket (comm)
-
-                    if (lectura != null) // Si es que el cliente no escribió nada, no procese nada
-                    {
-                        Console.WriteLine($"Cliente: {lectura}"); // Mostrar mensaje desde cliente
-
-                        if (lectura.ToLower() == "q")
-                        {
-                            clienteSocket.Disconnect();
-                            serverProduction.Stop();
-                            Environment.Exit(0);
-                        }
-                    }
-
-                    clienteSocket.Disconnect();
-                }
-            } else
-            {
-                Console.WriteLine("No pasó! :(");
-                // No pudo levantar el servidor
-            }
+            // Iniciar el procedimiento del lanzamiento del hilo servidor
+            ServerThread server = new ServerThread();
+            Thread hiloNuevoServidor = new Thread(new ThreadStart(server.Execute)); // indicar método que se ejecutará al iniciar el hilo
+            hiloNuevoServidor.IsBackground = true;
+            hiloNuevoServidor.Start();
 
             Console.ReadKey();
-            serverProduction.Stop();
-        }
+        }        
     }
 }

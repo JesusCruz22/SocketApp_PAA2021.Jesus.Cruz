@@ -48,10 +48,17 @@
     <Compile Include="Comm\ServerSocket.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Threads\ClientThread.cs" />
+    <Compile Include="Threads\ServerThread.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\SocketAppDAL\SocketAppDAL.csproj">
+      <Project>{ab7d14ee-a2e4-4330-b0be-b76cde0a0711}</Project>
+      <Name>SocketAppDAL</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
