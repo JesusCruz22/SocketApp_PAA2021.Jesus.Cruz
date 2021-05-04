@@ -26,12 +26,24 @@ namespace SocketApp1_Cliente
             {
                 // Lo que se hará a continuación tiene un orden que puede variar,
                 // dependiento de la implementación y requerimientos del problema
+                /* Proceso de leer e imprimir mensaje del servidor */
                 string mensajeRecibido = communicationServer.Read();
                 Console.WriteLine($"Servidor: {mensajeRecibido}");
 
-                Console.WriteLine("Escriba el mensaje que desea enviar al servidor:");
+                /* Proceso de solicitar input del usuario y enviar al servidor */
+                Console.WriteLine("Escriba el remitente del mensaje:");
                 string mensajeEnviar = Console.ReadLine().Trim(); // Sanitizar
                 communicationServer.Write(mensajeEnviar);
+
+                /* Proceso de leer e imprimir mensaje del servidor */
+                mensajeRecibido = communicationServer.Read();
+                Console.WriteLine($"Servidor: {mensajeRecibido}");
+
+                /* Proceso de solicitar input del usuario y enviar al servidor */
+                Console.WriteLine("Escriba el mensaje:");
+                mensajeEnviar = Console.ReadLine().Trim(); // Sanitizar
+                communicationServer.Write(mensajeEnviar);
+
                 communicationServer.Disconnect();
             } else // Si es que no logró conectar
             {

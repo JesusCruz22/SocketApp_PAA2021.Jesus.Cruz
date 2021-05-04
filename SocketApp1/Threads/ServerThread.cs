@@ -21,6 +21,7 @@ namespace SocketApp1.Threads
             serverSocket = new ServerSocket(); // Crear servidor socket (hecho previamente)
             if(serverSocket.Start())
             {
+                Console.WriteLine("Servidor iniciado!");
                 while (true)
                 {
                     Socket socket = serverSocket.getClient(); // Cuando un cliente se conecte, levantará el socket
