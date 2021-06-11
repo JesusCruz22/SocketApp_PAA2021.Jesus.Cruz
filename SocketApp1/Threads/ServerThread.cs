@@ -13,12 +13,10 @@ namespace SocketApp1.Threads
     {
         private ServerSocket serverSocket;
 
-        // Construir el socket a partir del thread
-        // Ejecutar la lectura de clientes
-        // Hacer una ejecución de cada cliente que se conecta en otro thread
         public void Execute()
         {
-            serverSocket = new ServerSocket(); // Crear servidor socket (hecho previamente)
+            // Crear servidor socket
+            serverSocket = new ServerSocket(); 
             if(serverSocket.Start())
             {
                 Console.WriteLine("Servidor iniciado!");
@@ -35,10 +33,8 @@ namespace SocketApp1.Threads
                     hiloNuevoCliente.IsBackground = true;
                     hiloNuevoCliente.Start(); 
                 }
-
-                // ToDo: Hacer una ejecución de cada cliente que se conecta en otro thread (req: ClientThread)
-
-            } else
+            } 
+            else
             {
                 Console.WriteLine("Error al levantar servidor");
             }

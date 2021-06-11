@@ -24,30 +24,54 @@ namespace SocketApp1_Cliente
             // Intentar conectar
             if (communicationServer.Connect())
             {
-                // Lo que se hará a continuación tiene un orden que puede variar,
-                // dependiento de la implementación y requerimientos del problema
-                /* Proceso de leer e imprimir mensaje del servidor */
-                string mensajeRecibido = communicationServer.Read();
-                Console.WriteLine($"Servidor: {mensajeRecibido}");
+                // Solicitar e ingresar ID de la celda desde el servidor
+                string idCelda = communicationServer.Read();
+                Console.WriteLine(idCelda);
+                idCelda = Console.ReadLine().Trim();
+                communicationServer.Write(idCelda);
 
-                /* Proceso de solicitar input del usuario y enviar al servidor */
-                Console.WriteLine("Escriba el remitente del mensaje:");
-                string mensajeEnviar = Console.ReadLine().Trim(); // Sanitizar
-                communicationServer.Write(mensajeEnviar);
+                Console.WriteLine($"Ingrese los valores de la celda con ID {idCelda}\n");
 
-                /* Proceso de leer e imprimir mensaje del servidor */
-                mensajeRecibido = communicationServer.Read();
-                Console.WriteLine($"Servidor: {mensajeRecibido}");
+                // Solicitar e ingresar Voltaje
+                string voltaje = communicationServer.Read();
+                Console.WriteLine(voltaje);
+                voltaje = Console.ReadLine().Trim();
+                communicationServer.Write(voltaje);
 
-                /* Proceso de solicitar input del usuario y enviar al servidor */
-                Console.WriteLine("Escriba el mensaje:");
-                mensajeEnviar = Console.ReadLine().Trim(); // Sanitizar
-                communicationServer.Write(mensajeEnviar);
+                // Solicitar e ingresar Temperatura
+                string temperatura = communicationServer.Read();
+                Console.WriteLine(temperatura);
+                temperatura = Console.ReadLine().Trim();
+                communicationServer.Write(temperatura);
+
+                // Solicitar e ingresar Nivel
+                string nivel = communicationServer.Read();
+                Console.WriteLine(nivel);
+                nivel = Console.ReadLine().Trim();
+                communicationServer.Write(nivel);
+
+                // Solicitar e ingresar Flujo
+                string flujo = communicationServer.Read();
+                Console.WriteLine(flujo);
+                flujo = Console.ReadLine().Trim();
+                communicationServer.Write(flujo);
+
+                // Solicitar e ingresar Observaciones
+                string observaciones = communicationServer.Read();
+                Console.WriteLine(observaciones);
+                observaciones = Console.ReadLine().Trim();
+                communicationServer.Write(observaciones);
+
+                Console.WriteLine($"\nLos valores de la celda con ID {idCelda}, fueron ingresados correctamente." +
+                    $"\nPresione cualquier tecla para desconectarse del servidor." +
+                    $"\nAdios.");
+                Console.ReadKey();
 
                 communicationServer.Disconnect();
             } else // Si es que no logró conectar
             {
                 Console.WriteLine("No se pudo conectar con el servidor");
+                Console.ReadKey();
             }
         }
     }
