@@ -26,32 +26,48 @@ namespace SocketApp1.Threads
             // Interactuar con el cliente
             clientSocket = new ClientSocket(clienteConectado);
 
-            // A) SOLICITAR DATOS AL CLIENTE
-            // Enviar solicitud de ingreso de remitente y guardar resultado desde el socket
-            clientSocket.Write("Ingrese remitente:");
-            string remitente = clientSocket.Read();
+            /* SOLICITAR VALORES DE CELDA AL CLIENTE */
+            // Solicitar ID de celda
+            clientSocket.Write("Ingrese el ID de la celda:");
+            string idCelda = clientSocket.Read();
 
-            // Enviar solicitud de ingreso de texto y guardar resultado desde el socket
-            clientSocket.Write("Ingrese texto:");
-            string texto = clientSocket.Read();
+            // Solicitar los valores de la celda
+            // Voltaje
+            clientSocket.Write("- Voltaje:");
+            string voltaje = clientSocket.Read();
+            // Temperatura
+            clientSocket.Write("- Temperatura:");
+            string temperatura = clientSocket.Read();
+            // Nivel
+            clientSocket.Write("- Nivel:");
+            string nivel = clientSocket.Read();
+            // Flujo
+            clientSocket.Write("- Flujo:");
+            string flujo = clientSocket.Read();
+            // Observaciones
+            clientSocket.Write("- Observaciones:");
+            string observaciones = clientSocket.Read();
 
-            // B) CREAR EL MENSAJE
-            // Elaboramos el mensaje (DTO)
-            Message mensaje = new Message()
+            /* CREAR EL MENSAJE PARA EL DTO */
+            Message message = new Message()
             {
-                Remitente = remitente,
-                Texto = texto,
-                Tipo = "NORMAL"
+                IdCelda = idCelda,
+                Voltaje = voltaje,
+                Temperatura = temperatura,
+                Flujo = flujo,
+                Nivel = nivel,
+                Observaciones = observaciones
             };
 
             // Para enviar un DTO => DAL
             MessageDAL messageDAL = MessageDAL.GetInstance();
 
-            // GUARDAR EL MENSAJE (DE FORMA SEGURA)
+            /* GUARDAR EL MENSAJE DE FORMA SEGURA Y DESCONECTAR CLIENT SOCKET */
             lock (messageDAL)
             {
-                messageDAL.Add(mensaje);
+                messageDAL.Add(message);
             }
+
             clientSocket.Disconnect();
         }
     }

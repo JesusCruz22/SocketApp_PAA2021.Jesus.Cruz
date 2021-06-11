@@ -6,29 +6,31 @@ using System.Threading.Tasks;
 
 namespace SocketAppDAL.DTO
 {
-    // En otra parte del proyecto:
-    // Message mensaje = new Message() {
-    //      Tipo = "Mensaje",
-    //      Remitente = "Servidor",
-    //      Texto = "Oli"
-    //  }
-
-    // mensaje.toString() -> (SIN CAMBIAR EL MÉTODO TO STRING) -> CONSOLE OUTPUT: [object]
-    // mensaje.toString() -> (PERSONALIZANDO MÉTODO TO STRING) -> CONSOLE OUTPUT: Mensaje;Servidor;Oli
     public class Message
     {
-        private string tipo;
-        private string remitente;
-        private string texto;
+        private string idCelda;
 
-        public string Tipo { get => tipo; set => tipo = value; }
-        public string Remitente { get => remitente; set => remitente = value; }
-        public string Texto { get => texto; set => texto = value; }
+        private string voltaje;
+        private string temperatura;
+        private string nivel;
+        private string flujo;
+
+        private string observaciones;
+
+        public string IdCelda { get => idCelda; set => idCelda = value; }
+        public string Voltaje { get => voltaje; set => voltaje = value; }
+        public string Temperatura { get => temperatura; set => temperatura = value; }
+        public string Nivel { get => nivel; set => nivel = value; }
+        public string Flujo { get => flujo; set => flujo = value; }
+        public string Observaciones { get => observaciones; set => observaciones = value; }
 
         public override string ToString()
         {
-            //return Tipo + ";" + Remitente + ";" + Texto;
-            return $"{Tipo};{Remitente};{Texto}";
+            // Construir mensaje a enviar con los valores ingresados
+            string mensaje =
+                $"{idCelda}-{voltaje}-{temperatura}-{nivel}-{flujo}-{observaciones}";
+            // Retornar mensaje
+            return mensaje;
         }
 
     }
